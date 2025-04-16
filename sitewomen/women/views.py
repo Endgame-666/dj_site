@@ -29,6 +29,7 @@ def index(request):
         'title': 'Главная страница',
         'menu': menu,
         'posts': data_db,
+        'cat_selected': 0,   # не обязательная строчка
     }
     return render(request, 'women/index.html', context=data)
 
@@ -54,8 +55,14 @@ def login(request):
 
 
 def show_category(request, cat_id):
-    """Функция-заглушка"""
-    return index(request)
+    data = {
+        'title': 'Отображение по рубрикам',
+        'menu': menu,
+        'posts': data_db,
+        'cat_selected': cat_id,
+    }
+
+    return render(request, 'women/index.html', context=data)
 
 def page_not_found(request, exception):
     return HttpResponseNotFound("<h1>Страница не найдена</h1>")
